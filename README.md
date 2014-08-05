@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fpinscala-muc/fpinscala-seelmann.svg?branch=master)](https://travis-ci.org/fpinscala-muc/fpinscala-seelmann)
+
 This repository contains exercises, hints, and answers for the book [Functional Programming in Scala](http://manning.com/bjarnason/). Along with the book itself, it's the closest you'll get to having your own private functional programming tutor without actually having one.
 
 Here's how to use this repository:
