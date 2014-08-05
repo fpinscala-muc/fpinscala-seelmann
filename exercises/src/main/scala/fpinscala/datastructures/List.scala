@@ -46,18 +46,51 @@ object List { // `List` companion object. Contains functions for creating and wo
   def product2(ns: List[Double]) = 
     foldRight(ns, 1.0)(_ * _) // `_ * _` is more concise notation for `(x,y) => x * y`; see sidebar
 
+  def tail[A](l: List[A]): List[A] =
+    l match {
+      case Nil => sys.error("empty list has no tail")
+      case Cons(_, t) => t
+    }
 
-  def tail[A](l: List[A]): List[A] = sys.error("todo")
+  def setHead[A](l: List[A], h: A): List[A] =
+    Cons(h, tail(l))
 
-  def setHead[A](l: List[A], h: A): List[A] = sys.error("todo")
+  @annotation.tailrec
+  def drop[A](l: List[A], n: Int): List[A] = {
+    l match {
+      case Nil => Nil
+      case Cons(_, t) if (n < 0) => l
+      case Cons(_, t) if (n == 0) => l
+      case Cons(_, t) => drop(t, n - 1)
+    }
+  }
 
-  def drop[A](l: List[A], n: Int): List[A] = sys.error("todo")
+  @annotation.tailrec
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = {
+    l match {
+      case Nil => Nil
+      case Cons(h, t) if f(h) => dropWhile(t, f)
+      case Cons(_, t) => l
+    }
+  }
 
-  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = sys.error("todo")
+  def init[A](l: List[A]): List[A] = {
+    l match {
+      case Cons(h, Nil) => Nil
+      case Cons(h, t) => Cons(h, init(t))
+    }
+  }
 
-  def init[A](l: List[A]): List[A] = sys.error("todo")
-
-  def length[A](l: List[A]): Int = sys.error("todo")
+  def length[A](l: List[A]): Int = {
+    @annotation.tailrec
+    def loop(l: List[A], n: Int): Int = {
+      l match {
+        case Nil => n
+        case Cons(_, t) => loop(t, n + 1)
+      }
+    }
+    loop(l, 0)
+  }
 
   def foldLeft[A,B](l: List[A], z: B)(f: (B, A) => B): B = sys.error("todo")
 
