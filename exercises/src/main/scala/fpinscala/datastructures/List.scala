@@ -82,35 +82,43 @@ object List { // `List` companion object. Contains functions for creating and wo
   }
 
   def length[A](l: List[A]): Int = {
-    @annotation.tailrec
-    def loop(l: List[A], n: Int): Int = {
-      l match {
-        case Nil => n
-        case Cons(_, t) => loop(t, n + 1)
-      }
-    }
-    loop(l, 0)
+    foldRight(l, 0)((_, y) => y + 1)
   }
 
-  def foldLeft[A,B](l: List[A], z: B)(f: (B, A) => B): B = sys.error("todo")
+  @annotation.tailrec
+  def foldLeft[A, B](l: List[A], z: B)(f: (B, A) => B): B = {
+    l match {
+      case Nil => z
+      case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
+    }
+  }
 
-  def sumViaFoldLeft(nums: List[Int]): Int = sys.error("todo")
+  def sumViaFoldLeft(nums: List[Int]): Int =
+    foldLeft(nums, 0)(_ + _)
 
-  def productViaFoldLeft(nums: List[Double]): Double = sys.error("todo")
+  def productViaFoldLeft(nums: List[Double]): Double =
+    foldLeft(nums, 1.0)(_ * _)
 
-  def lengthViaFoldLeft(l: List[_]): Int = sys.error("todo")
+  def lengthViaFoldLeft(l: List[_]): Int =
+    foldLeft(l, 0)((z, _) => z + 1)
 
-  def reverse[A](l: List[A]): List[A] = sys.error("todo")
+  def reverse[A](l: List[A]): List[A] =
+    foldLeft(l, Nil: List[A])((as, a) => Cons(a, as))
 
-  def appendViaFoldRight[A](l1: List[A], l2: List[A]): List[A] = sys.error("todo")
+  def appendViaFoldRight[A](l1: List[A], l2: List[A]): List[A] = 
+    foldRight(l1, l2)(Cons(_, _))
 
-  def appendViaFoldLeft[A](a1: List[A], a2: List[A]): List[A] = sys.error("todo")
+  def appendViaFoldLeft[A](a1: List[A], a2: List[A]): List[A] =
+    foldLeft(reverse(a1), a2)((as, a) => Cons(a, as))
 
-  def concat[A](l: List[List[A]]): List[A] = sys.error("todo")
+  def concat[A](l: List[List[A]]): List[A] =
+    foldLeft(l, Nil: List[A])((a, z) => appendViaFoldLeft(a, z))
 
-  def add1[T](nums: List[T])(implicit ev: Numeric[T]): List[T] = sys.error("todo")
+  def add1[T](nums: List[T])(implicit ev: Numeric[T]): List[T] =
+    foldRight(nums, Nil: List[T])((a, as) => Cons(ev.plus(a, ev.one), as))
 
-  def doubleToString(l: List[Double]): List[String] = sys.error("todo")
+  def doubleToString(l: List[Double]): List[String] =
+    foldRight(l, Nil: List[String])((a, as) => Cons(a.toString, as))
 
   def map[A,B](l: List[A])(f: A => B): List[B] = sys.error("todo")
 

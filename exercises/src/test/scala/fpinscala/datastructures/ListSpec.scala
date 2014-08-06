@@ -314,6 +314,7 @@ class ListSpec extends FlatSpec with PropertyChecks {
       (List(Nil), Nil),
       (List(Nil, Nil), Nil),
       (List(List(1,2,3)), List(1,2,3)),
+      (List(List(1,2,3),List(4,5,6),List(7,8,9)), List(1,2,3,4,5,6,7,8,9)),
       (List(List(1),List(2),List(3)), List(1,2,3)),
       (List(List("a", "b", "c")), (List("a", "b", "c"))),
       (List(List("a"),List("b"),List("c")), List("a","b","c")))
