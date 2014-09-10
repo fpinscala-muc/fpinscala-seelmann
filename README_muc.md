@@ -82,12 +82,52 @@ For the easily bored:
 * http://typelevel.org/blog/2013/12/15/towards-scalaz-2.html Fold FTEB
 
 ### Chapter 4: Handling errors without exceptions
+### Notes
+#### Exercise 4.2 variance: implemented with for-comprehension
+First here's a straightforward solution using flatMap & map:  
+https://github.com/fpinscala-muc/fpinscala-abo64/blob/master/exercises/src/main/scala/fpinscala/errorhandling/Option.scala#L51  
+Jörg could not fall asleep after today's session before he had not solved the variance w/ for-comprehension puzzle! So here is his solution:  
+https://github.com/fpinscala-muc/fpinscala-g-fresh/blob/master/exercises/src/main/scala/fpinscala/errorhandling/Option.scala#L130  
+This arguably looks and read better than the flatMap/map combinator solution, and by all means feel free to write code like this in for-comprehension style!
+Yesterday I (Achim) just saw the pattern "flatMap followed by map" and immediately read that as just one for-comprehension.
+I was wrong here b/c the flatMap belongs to an Option (the result of "mean(xs)") whereas map belongs to a Seq (namely "xs").
+So if you don't want to go for nested for-comprehensions Jörg's solution is the best you can get here. Which is more than just acceptable, I would say.
+Thanks, Jörg! And I hope you had sweet dreams after this.
+
+#### scala.util.Try
+See the Additional links below for some (of many) tutorials for Try.
+When it comes to FP error handling in concrete daily life cases I personally ask myself the following questions:
+
+* Do I care about the error at all? If not use Option.
+* Do I care about the error, and I want to break up at the first error and pass it along to the caller? Use Try.
+* Do I need to accumulate errors and pass them along to the caller? Use something fancy like scalaz.Validation.
+
+The article "How do I error handle thee?" (the typelevel.org link below) gives a nice summary.  
+But if you are a purist then Try is out of the question - it is not a true Monad!
+
+#### Paul Phillips, disappointed lover
+Here he stays relatively calm: http://www.youtube.com/watch?v=uiJycy6dFSQ  
+And here he is running wild: http://www.youtube.com/watch?v=TS1lpKBMkgg  
+But some discussions following his rants:  
+https://groups.google.com/forum/#!topic/scala-user/ImqlClXTrS4%5B1-25-false%5D  
+http://www.linkedin.com/groups/Can-anyone-watch-Paul-Phillips-746917.S.5837580490751639556  
+https://news.ycombinator.com/item?id=7258866  
+MHO: Scala collections seem to work as expected (even just great if compare them to Java collections or helper libs like Guava),
+so why bother too much about internals?
+
+#### Some more examples for Option and Either
+These are the additional examples from the session: https://github.com/fpinscala-muc/fpinscala-abo64/blob/master/exercises/src/main/scala/fpinscala/errorhandling/Worksheet.sc
 
 ### Additional links
 * http://danielwestheide.com/blog/2012/12/19/the-neophytes-guide-to-scala-part-5-the-option-type.html
 * http://danielwestheide.com/blog/2012/12/26/the-neophytes-guide-to-scala-part-6-error-handling-with-try.html Try has its theoretical flaws, but in practice ...
 * http://danielwestheide.com/blog/2013/01/02/the-neophytes-guide-to-scala-part-7-the-either-type.html
+* http://www.michaelpollmeier.com/scala-util-try-chain-to-handle-all-success-and-error-cases/
+* http://ymasory.github.io/error-handling-in-scala
 * http://typelevel.org/blog/2014/02/21/error-handling.html
+* http://aboutwhichmorelater.tumblr.com/post/30409572482/scala-util-try
+* https://gist.github.com/ms-tg/6222775
+* http://technotroph.wordpress.com/2013/05/02/collection-of-fp-articles-by-paul-callaghan/ For the easily bored again: Yes, it is Haskell, but the principles apply to FP in general.
 
 ### Chapter 5: Strictness and laziness
 
