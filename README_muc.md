@@ -135,4 +135,10 @@ These are the additional examples from the session: https://github.com/fpinscala
 * http://www.nurkiewicz.com/2013/05/lazy-sequences-in-scala-and-clojure.html
 * https://github.com/ardlema/scala-lazy-evaluation (exercise from Coursera "Principles of Reactive Programming" course https://www.coursera.org/course/reactive)
 
+### Google Billboard Puzzle
+Here is the problem http://mathworld.wolfram.com/news/2004-10-13/google/ with the Mathematica solution  
+Select[FromDigits/@Partition[First[RealDigits[E,10,1000]],10,1],PrimeQ,1]  
+Here is a Java solution: http://google-tale.blogspot.de/2008/07/google-billboard-puzzle.html  
+Can we come up with an elegant (Stream?!) solution in Scala that is somewhere in between Mathematica and Java?
+
 
