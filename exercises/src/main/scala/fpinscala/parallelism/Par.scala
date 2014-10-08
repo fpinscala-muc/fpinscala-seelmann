@@ -47,7 +47,8 @@ object Par {
   // threads when one should suffice. This is a symptom of a more serious problem 
   // with the implementation, and we will discuss this later in the chapter.
   def fork[A](a: => Par[A]): Par[A] = 
-    es => es.submit(new Callable[A] { 
+    es => es.submit(new Callable[A] {
+      printf("### fork %s\n", java.lang.Thread.currentThread())
       def call = a(es).get
     })
 
@@ -76,13 +77,26 @@ object Par {
       if (run(es)(cond).get) t(es) // Notice we are blocking on the result of `cond`.
       else f(es)
 
-  def choiceN[A](n: Par[Int])(choices: List[Par[A]]): Par[A] = ???
+  def choiceN[A](n: Par[Int])(choices: List[Par[A]]): Par[A] =
+    es => {
+      choices(run(es)(n).get())(es)
+    }
 
-  def choiceViaChoiceN[A](a: Par[Boolean])(ifTrue: Par[A], ifFalse: Par[A]): Par[A] = ???
+  def choiceViaChoiceN[A](a: Par[Boolean])(ifTrue: Par[A], ifFalse: Par[A]): Par[A] =
+    es => {
+      val i = if (run(es)(a).get) 0 else 1
+      choiceN(unit(i))(List(ifTrue, ifFalse))(es)
+    }
 
-  def choiceMap[K,V](key: Par[K])(choices: Map[K,Par[V]]): Par[V] = ???
+  def choiceMap[K, V](key: Par[K])(choices: Map[K, Par[V]]): Par[V] =
+    es => {
+      choices(run(es)(key).get)(es)
+    }
 
-  def chooser[A,B](pa: Par[A])(choices: A => Par[B]): Par[B] = ???
+  def chooser[A, B](pa: Par[A])(choices: A => Par[B]): Par[B] =
+    es => {
+      choices(run(es)(pa).get)(es)
+    }
 
   def choiceViaChooser[A](cond: Par[Boolean])(t: Par[A], f: Par[A]): Par[A] = ???
 
