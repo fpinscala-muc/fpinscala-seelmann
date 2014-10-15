@@ -39,6 +39,21 @@ If not done yet the sbteclipse plugin has to be configured, add the following to
 
 See also https://github.com/typesafehub/sbteclipse/
 
+### Import projects into IntelliJ IDEA
+
+To import the project into IntelliJ IDEA the project files have to be generated first.
+
+    $ sbt gen-idea
+
+If not done yet the IntelliJ plugin has to be configured, add the following to `~/.sbt/0.13/plugins/plugins.sbt`:
+
+    addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.6.0")
+
+See also https://github.com/mpeltonen/sbt-idea/
+
+## In the Beginning - Scala
+* Scala Coding guidelines: http://twitter.github.io/effectivescala/ (see also the Learning Scala links in the Intro section there)
+
 ## Chapter 1: What is functional programming?
 ### Additional links
 * http://www.youtube.com/watch?v=1gZAqJA2pEk This video by Paul Chiusano is about an earlier version (with a different example) of the first chapter. It gives a nice intro & summary what the book is up to.
@@ -143,4 +158,21 @@ Can we come up with an elegant (Stream?!) solution in Scala that is somewhere in
 
 ### Misc
 * Interesting talk about types and type inference: https://www.youtube.com/watch?v=fDTt_uo0F-g
+* [Property-based testing with ScalaCheck](http://www.nurkiewicz.com/2014/09/property-based-testing-with-scalacheck.html)
+(although [ScalaTests's docu](http://scalatest.org/user_guide/generator_driven_property_checks) is also quite ok).
+* [Object-Functional Programming – A Beautiful Unification or a Kitchen Sink?](https://speakerdeck.com/missingfaktor/object-functional-programming-a-beautiful-unification-or-a-kitchen-sink)
 
+#### Is Scala too complex?
+* http://lampwww.epfl.ch/~odersky/blogs/isscalacomplex.html
+* http://warpedjavaguy.wordpress.com/2010/08/02/the-scala-is-too-complex-conspiracy-1/
+* http://blog.ericdaugherty.com/2010/07/is-scala-too-complex.html
+* https://news.ycombinator.com/item?id=830326
+* http://stackoverflow.com/questions/2573899/why-is-scala-very-complex
+* http://www.artima.com/weblogs/viewpost.jsp?thread=268561
+* http://www.scala-lang.org/old/node/7431
+* http://michid.wordpress.com/2010/08/24/so-scala-is-too-complex/
+* http://cemerick.com/2011/07/14/scala-isnt-complicated-its-clever/
+* http://www.scala-lang.org/old/node/8610
+* http://blog.schauderhaft.de/2010/12/05/is-it-bad-to-use-scala-as-java-with-a-more-concise-syntax/
+* http://speaking-my-language.blogspot.de/2009/11/is-scala-more-complicated-than-java.html
+* http://scala-programming-language.1934581.n4.nabble.com/More-unicode-alternatives-for-ASCII-operators-td2008146.html
