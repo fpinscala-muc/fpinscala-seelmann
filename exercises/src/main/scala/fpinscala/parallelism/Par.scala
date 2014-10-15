@@ -48,7 +48,7 @@ object Par {
   // with the implementation, and we will discuss this later in the chapter.
   def fork[A](a: => Par[A]): Par[A] = 
     es => es.submit(new Callable[A] {
-      printf("### fork %s\n", java.lang.Thread.currentThread())
+      //printf("### fork %s\n", java.lang.Thread.currentThread())
       def call = a(es).get
     })
 
