@@ -52,7 +52,8 @@ If not done yet the IntelliJ plugin has to be configured, add the following to `
 See also https://github.com/mpeltonen/sbt-idea/
 
 ## In the Beginning - Scala
-* Scala Coding guidelines: http://twitter.github.io/effectivescala/ (see also the Learning Scala links in the Intro section there)
+* [Scala Coding guidelines:](http://twitter.github.io/effectivescala/) (see also the Learning Scala links in the Intro section there)
+* [Scala Best Practices](https://github.com/alexandru/scala-best-practices/)
 
 ## Chapter 1: What is functional programming?
 ### Additional links
@@ -155,6 +156,11 @@ Here is the problem http://mathworld.wolfram.com/news/2004-10-13/google/ with th
 Select[FromDigits/@Partition[First[RealDigits[E,10,1000]],10,1],PrimeQ,1]  
 Here is a Java solution: http://google-tale.blogspot.de/2008/07/google-billboard-puzzle.html  
 Can we come up with an elegant (Stream?!) solution in Scala that is somewhere in between Mathematica and Java?
+
+### Chapter 5: Strictness and laziness
+
+#### Additional links
+* On composability of Functors, Applicatives, and Monads: https://speakerdeck.com/larsrh/optimusprimet
 
 ### Misc
 * Interesting talk about types and type inference: https://www.youtube.com/watch?v=fDTt_uo0F-g
